@@ -1,5 +1,5 @@
 package Model;
 
 public enum SceneName {
-    LoginPage, NurseGreet;
+    LoginPage, IndexPage, NurseGreet, PatientHealthInfo;
 }

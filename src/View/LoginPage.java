@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class LoginPage {
@@ -25,38 +26,40 @@ public class LoginPage {
 
     public Scene getScene() {
 
-        Pane login_page_pane = new Pane();
-        Scene login_page_scene = new Scene(login_page_pane, 1300, 800);
+        Pane pane = new Pane();
+        Scene scene = new Scene(pane, 1300, 800);
+        scene.getStylesheets().add(Objects.requireNonNull(this.getClass().getResource("stylesheet.css")).toExternalForm());
 
         // title text
         Text title = new Text("Login Page");
-        title.setFont(new Font("Arial", 50));
-        title.relocate(530, 100);
+        title.getStyleClass().add("title");
+        title.relocate(520, 130);
+        pane.getChildren().add(title);
 
         // user id text field
         TextField user_id = new TextField();
-        user_id.setFont(new Font("Arial", 25));
         user_id.setPromptText("User ID");
         user_id.setFocusTraversable(false);
         user_id.setPrefWidth(255);
         user_id.setPrefHeight(40);
         user_id.relocate(530, 400);
+        pane.getChildren().add(user_id);
 
         // password text field
         TextField password = new TextField();
-        password.setFont(new Font("Arial", 25));
         password.setPromptText("Password");
         password.setFocusTraversable(false);
         password.setPrefWidth(255);
         password.setPrefHeight(40);
         password.relocate(530, 480);
+        pane.getChildren().add(password);
 
         // login button
         Button login = new Button("Log In");
-        login.setFont(new Font("Arial", 25));
         login.setPrefWidth(255);
         login.setPrefHeight(40);
         login.relocate(530, 560);
+        pane.getChildren().add(login);
         // login action
         EventHandler<ActionEvent> exec_login = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
@@ -70,9 +73,9 @@ public class LoginPage {
                         if (fr.nextLine().equals(uid + "===" + pwd)) {
                             data_exists = true;
                             System.out.println("Login Successful");
-                            Button btn = new Button();
                             Controller controller = new Controller(stage);
-                            controller.showNurseGreet();
+                            // controller.showNurseGreet();
+                            controller.showIndexPage();
                         }
                     }
                     fr.close();
@@ -91,10 +94,10 @@ public class LoginPage {
 
         // create account button
         Button create_account = new Button("Create Account");
-        create_account.setFont(new Font("Arial", 25));
         create_account.setPrefWidth(255);
         create_account.setPrefHeight(40);
         create_account.relocate(530, 640);
+        pane.getChildren().add(create_account);
         // login action
         EventHandler<ActionEvent> exec_create_account = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
@@ -117,15 +120,8 @@ public class LoginPage {
             }
         };
         create_account.setOnAction(exec_create_account);
-
-        // arrange nodes
-        login_page_pane.getChildren().add(title);
-        login_page_pane.getChildren().add(user_id);
-        login_page_pane.getChildren().add(password);
-        login_page_pane.getChildren().add(login);
-        login_page_pane.getChildren().add(create_account);
-
-        return login_page_scene;
+        
+        return scene;
     }
 
 }

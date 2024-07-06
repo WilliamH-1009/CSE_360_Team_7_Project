@@ -1,0 +1,10 @@
+.root{
+    -fx-font-family: "Arial";
+    -fx-font-size: 20pt;
+}
+
+.title{
+    -fx-font-family: "Arial";
+    -fx-font-size: 40pt;
+}
+
