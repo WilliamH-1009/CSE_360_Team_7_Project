@@ -1,0 +1,9 @@
+Name::asd
+Birthday::2024-07-06
+Weight::1
+Height_ft::2
+Height_in::3
+Temperature::4
+Pressure1::5
+Pressure2::6
+===next===

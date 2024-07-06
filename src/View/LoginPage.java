@@ -74,7 +74,8 @@ public class LoginPage {
                             data_exists = true;
                             System.out.println("Login Successful");
                             Controller controller = new Controller(stage);
-                            controller.showNurseGreet();
+                            // controller.showNurseGreet();
+                            controller.showIndexPage();
                         }
                     }
                     fr.close();

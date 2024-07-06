@@ -4,8 +4,10 @@ import Model.SceneName;
 import java.util.HashMap;
 import java.util.Map;
 
+import View.IndexPage;
 import View.LoginPage;
 import View.NurseGreet;
+import View.PatientHealthInfo;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -22,10 +24,11 @@ public class Main extends Application {
     public void start(Stage stage) {
         try {
             scenes.put(SceneName.LoginPage, new LoginPage(stage).getScene());
+            scenes.put(SceneName.IndexPage, new IndexPage(stage).getScene());
             scenes.put(SceneName.NurseGreet, new NurseGreet(stage).getScene());
+            scenes.put(SceneName.PatientHealthInfo, new PatientHealthInfo(stage).getScene());
 
-//            stage.setScene(scenes.get(SceneName.LoginPage));
-            stage.setScene(scenes.get(SceneName.NurseGreet));
+            stage.setScene(scenes.get(SceneName.LoginPage));
             stage.setTitle("Pediatric Auto System");
             stage.show();
 

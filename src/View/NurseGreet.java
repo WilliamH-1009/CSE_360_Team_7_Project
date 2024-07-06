@@ -1,5 +1,6 @@
 package View;
 
+import Application.Controller;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
@@ -8,12 +9,8 @@ import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.util.Map;
 import java.util.Objects;
-import java.util.Scanner;
 
 public class NurseGreet {
 
@@ -24,6 +21,8 @@ public class NurseGreet {
     }
 
     public Scene getScene() {
+
+        Controller controller = new Controller(stage);
 
         Pane pane = new Pane();
         Scene scene = new Scene(pane, 1300, 800);
@@ -52,7 +51,7 @@ public class NurseGreet {
         label_birthday.relocate(150, 350);
         pane.getChildren().add(label_birthday);
 
-        TextField input_birthday = new TextField();
+        DatePicker input_birthday = new DatePicker();
         input_birthday.setFocusTraversable(false);
         input_birthday.setPrefWidth(190);
         input_birthday.setPrefHeight(40);
@@ -68,13 +67,9 @@ public class NurseGreet {
         check_age.relocate(200, 430);
         pane.getChildren().add(check_age);
 
-        // existing patient check
-        CheckBox check_existing = new CheckBox("Existing Patient?");
-        check_existing.setStyle("-fx-font-size: 18");
-        check_existing.setIndeterminate(false);
-        check_existing.setFocusTraversable(false);
-        check_existing.relocate(200, 480);
-        pane.getChildren().add(check_existing);
+        input_birthday.valueProperty().addListener((ov, oldValue, newValue) -> {
+            check_age.setSelected(controller.checkPatientAge(input_birthday.getValue()));
+        });
 
         // vitals input
         Text label_vitals = new Text("Vitals:");
@@ -168,6 +163,47 @@ public class NurseGreet {
         label_pressure_unit.relocate(1140, 490);
         pane.getChildren().add(label_pressure_unit);
 
+        // existing patient check
+        CheckBox check_existing = new CheckBox("Existing Patient?");
+        check_existing.setStyle("-fx-font-size: 18");
+        check_existing.setIndeterminate(false);
+        check_existing.setFocusTraversable(false);
+        check_existing.relocate(200, 480);
+        pane.getChildren().add(check_existing);
+
+        check_existing.selectedProperty().addListener((o, oldVal, newVal) -> {
+            if (newVal) {
+                if (controller.checkExisting(input_name.getText(), input_birthday.getValue())) {
+                    Map<String, String> patient_info_data;
+                    patient_info_data = controller.getPatientInfo(input_name.getText(), input_birthday.getValue());
+                    for (Map.Entry<String, String> entry : patient_info_data.entrySet()) {
+                        switch (entry.getKey()) {
+                            case "Weight":
+                                input_weight.setText(entry.getValue());
+                            case "Height_ft":
+                                input_height_ft.setText(entry.getValue());
+                            case "Height_in":
+                                input_height_in.setText(entry.getValue());
+                            case "Temperature":
+                                input_temperature.setText(entry.getValue());
+                            case "Pressure1":
+                                input_pressure1.setText(entry.getValue());
+                            case "Pressure2":
+                                input_pressure2.setText(entry.getValue());
+                        }
+                    }
+                }
+            } else if (oldVal) {
+                System.out.println("unchecked");
+                input_weight.setText("");
+                input_height_ft.setText("");
+                input_height_in.setText("");
+                input_temperature.setText("");
+                input_pressure1.setText("");
+                input_pressure2.setText("");
+            }
+        });
+
         // save patient info
         Button save_info = new Button("Save Patient\n Information");
         save_info.setFocusTraversable(false);
@@ -175,6 +211,15 @@ public class NurseGreet {
         save_info.setPrefHeight(80);
         save_info.relocate(560, 600);
         pane.getChildren().add(save_info);
+
+        save_info.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                controller.savePatientInfo(input_name.getText(), input_birthday.getValue(),
+                        input_weight.getText(), input_height_ft.getText(), input_height_in.getText(),
+                        input_temperature.getText(), input_pressure1.getText(), input_pressure2.getText());
+            }
+        });
 
         return scene;
     }
