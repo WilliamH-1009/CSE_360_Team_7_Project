@@ -24,8 +24,9 @@ public class Main extends Application {
             scenes.put(SceneName.LoginPage, new LoginPage(stage).getScene());
             scenes.put(SceneName.NurseGreet, new NurseGreet(stage).getScene());
 
-            stage.setScene(scenes.get(SceneName.LoginPage));
-            stage.setTitle("Multi-Scene Demo");
+//            stage.setScene(scenes.get(SceneName.LoginPage));
+            stage.setScene(scenes.get(SceneName.NurseGreet));
+            stage.setTitle("Pediatric Auto System");
             stage.show();
 
         } catch (Exception e) {
