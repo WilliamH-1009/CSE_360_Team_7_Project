@@ -4,13 +4,12 @@ import Model.SceneName;
 import java.util.HashMap;
 import java.util.Map;
 
-import View.IndexPage;
-import View.LoginPage;
-import View.NurseGreet;
-import View.PatientHealthInfo;
+import View.*;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+
+import javax.print.Doc;
 
 public class Main extends Application {
 
@@ -27,6 +26,7 @@ public class Main extends Application {
             scenes.put(SceneName.IndexPage, new IndexPage(stage).getScene());
             scenes.put(SceneName.NurseGreet, new NurseGreet(stage).getScene());
             scenes.put(SceneName.PatientHealthInfo, new PatientHealthInfo(stage).getScene());
+            scenes.put(SceneName.DoctorExamination, new DoctorExamination(stage).getScene());
             scenes.put(SceneName.PatientPortal, new PatientPortal(stage).getScene());
 
             stage.setScene(scenes.get(SceneName.LoginPage));

@@ -218,3 +218,4 @@ public class PatientPortal {
 
         return scene;
     }
+}
