@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
+import java.util.Map;
 import java.util.Objects;
 
 public class PatientHealthHistory {
@@ -82,7 +83,8 @@ public class PatientHealthHistory {
         add_allergy.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-
+                input_allergies.appendText(input_new_allergy.getText() + "\n");
+                input_new_allergy.setText("");
             }
         });
 
@@ -109,7 +111,8 @@ public class PatientHealthHistory {
         add_condition.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-
+                input_conditions.appendText(input_new_condition.getText() + "\n");
+                input_new_condition.setText("");
             }
         });
 
@@ -152,10 +155,32 @@ public class PatientHealthHistory {
         proceed.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-
+                String allergies = "";
+                for (String line : input_allergies.getText().split("\\n")) {
+                    allergies += line + ",";
+                }
+                String conditions = "";
+                for (String line : input_conditions.getText().split("\\n")) {
+                    conditions += line + ",";
+                }
+                controller.savePatientHealthHistory(allergies, conditions);
             }
         });
 
+        // set patient health history data
+        Map<String, String> health_history_data = controller.getPatientHealthHistory();
+        for (Map.Entry<String, String> entry : health_history_data.entrySet()) {
+            switch (entry.getKey()) {
+                case "Prescriptions":
+                    input_prescriptions.setText(entry.getValue().replaceAll(",", "\n"));
+                case "Immunizations":
+                    input_immunizations.setText(entry.getValue().replaceAll(",", "\n"));
+                case "Allergies":
+                    input_allergies.setText(entry.getValue().replaceAll(",", "\n"));
+                case "Conditions":
+                    input_conditions.setText(entry.getValue().replaceAll(",", "\n"));
+            }
+        }
 
 
         return scene;
