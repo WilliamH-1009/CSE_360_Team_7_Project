@@ -221,7 +221,21 @@ public class NurseGreet {
             }
         });
 
+        // doctor visit button
+        Button doctor_visit = new Button("Doctor Visit");
+        doctor_visit.setFocusTraversable(false);
+        doctor_visit.setPrefWidth(200);
+        doctor_visit.setPrefHeight(80);
+        doctor_visit.relocate(560, 700);
+        pane.getChildren().add(doctor_visit);
+
+        doctor_visit.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                controller.showDoctorExamination();
+            }
+        });
+
         return scene;
     }
-
 }
