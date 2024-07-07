@@ -4,10 +4,7 @@ import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import Model.SceneName;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
@@ -32,7 +29,7 @@ public class Controller {
     }
 
     public void showPatientHealthInfo() {
-        stage.setScene(Main.getScenes().get(SceneName.PatientHealthInfo));
+        stage.setScene(Main.getScenes().get(SceneName.PatientHealthHistory));
     }
 
     public void showDoctorExamination() {

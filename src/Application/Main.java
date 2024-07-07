@@ -25,11 +25,11 @@ public class Main extends Application {
             scenes.put(SceneName.LoginPage, new LoginPage(stage).getScene());
             scenes.put(SceneName.IndexPage, new IndexPage(stage).getScene());
             scenes.put(SceneName.NurseGreet, new NurseGreet(stage).getScene());
-            scenes.put(SceneName.PatientHealthInfo, new PatientHealthInfo(stage).getScene());
+            scenes.put(SceneName.PatientHealthHistory, new PatientHealthHistory(stage).getScene());
             scenes.put(SceneName.DoctorExamination, new DoctorExamination(stage).getScene());
             scenes.put(SceneName.PatientPortal, new PatientPortal(stage).getScene());
 
-            stage.setScene(scenes.get(SceneName.LoginPage));
+            stage.setScene(scenes.get(SceneName.PatientHealthHistory));
             stage.setTitle("Pediatric Auto System");
             stage.show();
 
