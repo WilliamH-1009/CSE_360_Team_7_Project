@@ -50,19 +50,19 @@ public class PatientPortal {
         pane.getChildren().add(label_birthday);
 
         // contact info label
-        Text label_contact = new Text("Contact Information:");
+        Text label_contact = new Text("Contact Information");
         label_contact.setStyle("-fx-font-weight: bold; -fx-font-size: 20");
         label_contact.relocate(100, 300);
         pane.getChildren().add(label_contact);
 
         // phone number text
-        Text label_phone_number = new Text("Phone Number:");
+        Text label_phone_number = new Text("Phone Number: ");
         label_phone_number.getStyleClass().add("text-area");
         label_phone_number.relocate(100, 340);
         pane.getChildren().add(label_phone_number);
 
         // email text
-        Text label_email = new Text("Email:");
+        Text label_email = new Text("Email: ");
         label_email.getStyleClass().add("text-area");
         label_email.relocate(100, 380);
         pane.getChildren().add(label_email);
@@ -75,7 +75,6 @@ public class PatientPortal {
         TextArea input_sending = new TextArea();
         input_sending.getStyleClass().add("text-area");
         input_sending.setFocusTraversable(false);
-        input_sending.setEditable(false);
         input_sending.setPrefWidth(300);
         input_sending.setPrefHeight(150);
         input_sending.relocate(150, 510);
@@ -92,7 +91,7 @@ public class PatientPortal {
         send.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-
+                controller.savePatientSendingMessage(input_sending.getText());
             }
         });
 
@@ -123,6 +122,50 @@ public class PatientPortal {
         input_visit_summary.setPrefHeight(450);
         input_visit_summary.relocate(900, 180);
         pane.getChildren().add(input_visit_summary);
+
+
+        // set patient contact info data
+        Map<String, String> contact_info_data = controller.getPatientContactInfo();
+        for (Map.Entry<String, String> entry : contact_info_data.entrySet()) {
+            switch (entry.getKey()) {
+                case "FirstName":
+                    label_first_name.setText(label_first_name.getText() + entry.getValue());
+                    break;
+                case "LastName":
+                    label_last_name.setText(label_last_name.getText() + entry.getValue());
+                    break;
+                case "Birthday":
+                    label_birthday.setText(label_birthday.getText() + entry.getValue());
+                    break;
+                case "PhoneNumber":
+                    label_phone_number.setText(label_phone_number.getText() + entry.getValue());
+                    break;
+                case "Email":
+                    label_email.setText(label_email.getText() + entry.getValue());
+                    break;
+            }
+        }
+
+        // set incoming messages
+        input_receiving.setText(controller.getPatientIncomingMessages());
+
+        // set visit summary
+        input_visit_summary.setText(controller.getPatientVisitSummary());
+
+        // return to menu
+        Button back = new Button("Back");
+        back.setFocusTraversable(false);
+        back.setPrefWidth(100);
+        back.setPrefHeight(30);
+        back.relocate(20, 20);
+        pane.getChildren().add(back);
+
+        back.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                controller.showIndexPage();
+            }
+        });
 
         return scene;
     }

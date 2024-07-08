@@ -36,6 +36,10 @@ public class Controller {
         stage.setScene(Main.getScenes().get(SceneName.DoctorExamination));
     }
 
+    public void showPatientPortal() {
+        stage.setScene(Main.getScenes().get(SceneName.PatientPortal));
+    }
+
     public boolean checkPatientAge(LocalDate birthday) {
         LocalDate today = LocalDate.now();
         return Period.between(birthday, today).getYears() >= 13;
@@ -230,6 +234,77 @@ public class Controller {
             alert.setContentText("Successfully Saved");
             alert.show();
             showDoctorExamination();
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    public Map<String, String> getPatientContactInfo() {
+        File file = new File("patient_contact_info.txt");
+        try {
+            Scanner fr = new Scanner(file);
+            if (fr.hasNextLine()) {
+                Map<String, String> patient_contact_info = new LinkedHashMap<>();
+                patient_contact_info.put("FirstName", fr.nextLine().split("::")[1]);
+                patient_contact_info.put("LastName", fr.nextLine().split("::")[1]);
+                patient_contact_info.put("Birthday", fr.nextLine().split("::")[1]);
+                patient_contact_info.put("PhoneNumber", fr.nextLine().split("::")[1]);
+                patient_contact_info.put("Email", fr.nextLine().split("::")[1]);
+                return patient_contact_info;
+            }
+            fr.close();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
+
+    public String getPatientIncomingMessages() {
+        File file = new File("patient_incoming_messages.txt");
+        try {
+            Scanner fr = new Scanner(file);
+            String messages = "";
+            while (fr.hasNextLine()) {
+                messages += (fr.nextLine() + "\n");
+            }
+            fr.close();
+            return messages;
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public String getPatientVisitSummary() {
+        File file = new File("patient_visit_summary.txt");
+        try {
+            Scanner fr = new Scanner(file);
+            String messages = "";
+            while (fr.hasNextLine()) {
+                messages += (fr.nextLine() + "\n");
+            }
+            fr.close();
+            return messages;
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void savePatientSendingMessage(String messages) {
+        File file = new File("doctor_receiving_messages.txt");
+        try {
+            if (!messages.isEmpty()) {
+                FileWriter fw = new FileWriter(file);
+                fw.write(messages);
+                fw.close();
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setContentText("Successfully Saved");
+                alert.show();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Please write something");
+                alert.show();
+            }
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }

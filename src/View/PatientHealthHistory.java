@@ -186,6 +186,20 @@ public class PatientHealthHistory {
             }
         }
 
+        // return to menu
+        Button back = new Button("Back");
+        back.setFocusTraversable(false);
+        back.setPrefWidth(100);
+        back.setPrefHeight(30);
+        back.relocate(20, 20);
+        pane.getChildren().add(back);
+
+        back.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                controller.showIndexPage();
+            }
+        });
 
         return scene;
     }

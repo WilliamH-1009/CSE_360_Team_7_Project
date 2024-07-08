@@ -1,0 +1,5 @@
+FirstName::www
+LastName::EEE
+Birthday::01-01-2024
+PhoneNumber::12321
+Email::@mail

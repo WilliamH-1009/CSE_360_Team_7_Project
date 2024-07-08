@@ -27,7 +27,7 @@ public class Main extends Application {
             scenes.put(SceneName.DoctorExamination, new DoctorExamination(stage).getScene());
             scenes.put(SceneName.PatientPortal, new PatientPortal(stage).getScene());
 
-            stage.setScene(scenes.get(SceneName.PatientPortal));
+            stage.setScene(scenes.get(SceneName.LoginPage));
             stage.setTitle("Pediatric Auto System");
             stage.show();
 

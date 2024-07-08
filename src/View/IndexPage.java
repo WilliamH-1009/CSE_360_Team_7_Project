@@ -1,5 +1,5 @@
 package View;
-//placeholder
+
 import Application.Controller;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -11,7 +11,6 @@ import javafx.event.EventHandler;
 
 import java.util.Objects;
 
-//*** This is a temporary page, only use for switching pages ***//
 public class IndexPage {
     private final Stage stage;
 
@@ -47,6 +46,13 @@ public class IndexPage {
         doctor_visit.relocate(560, 200);
         pane.getChildren().add(doctor_visit);
 
+        doctor_visit.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                controller.showDoctorExamination();
+            }
+        });
+
         Button patient_portal = new Button("Patient Portal");
         patient_portal.setFocusTraversable(false);
         patient_portal.setPrefWidth(200);
@@ -54,22 +60,13 @@ public class IndexPage {
         patient_portal.relocate(860, 200);
         pane.getChildren().add(patient_portal);
 
+        patient_portal.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                controller.showPatientPortal();
+            }
+        });
+
         return scene;
     }
 }
-
-/*reference code not work
-
-import java.util.File;
-File object_name = new File(Directory)
-
-
-StackPane root = new StackPane();
-root.getChildren().addAll(applicationContent);
-Pane p = new Pane();
-p.setStyle("-fx-background-color: rgba(31,31,31,0.6);");
-
-
-Scene scene = new Scene(root, 300, 250);
-
-*/
