@@ -4,10 +4,7 @@ import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import Model.SceneName;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
@@ -32,7 +29,7 @@ public class Controller {
     }
 
     public void showPatientHealthInfo() {
-        stage.setScene(Main.getScenes().get(SceneName.PatientHealthInfo));
+        stage.setScene(Main.getScenes().get(SceneName.PatientHealthHistory));
     }
 
     public void showDoctorExamination() {
@@ -142,6 +139,55 @@ public class Controller {
             System.out.println("Get Patient Info Failed");
         }
         return null;
+    }
+
+    public Map<String, String> getPatientHealthHistory() {
+        File file = new File("patient_health_history.txt");
+        try {
+            Scanner fr = new Scanner(file);
+            if (fr.hasNextLine()) {
+                Map<String, String> patient_health_history = new LinkedHashMap<>();
+                patient_health_history.put("Prescriptions", fr.nextLine().split("::")[1]);
+                patient_health_history.put("Immunizations", fr.nextLine().split("::")[1]);
+                patient_health_history.put("Allergies", fr.nextLine().split("::")[1]);
+                patient_health_history.put("Conditions", fr.nextLine().split("::")[1]);
+                return patient_health_history;
+            }
+            fr.close();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
+
+    public void savePatientHealthHistory(String allergies, String conditions) {
+        File file = new File("patient_health_history.txt");
+        try {
+            Scanner fr = new Scanner(file);
+            StringBuilder data = new StringBuilder();
+            data.append(fr.nextLine()).append("\n");
+            data.append(fr.nextLine()).append("\n");
+            if (allergies.isEmpty()) {
+                allergies = "None";
+            }
+            if (conditions.isEmpty()) {
+                conditions = "None";
+            }
+            data.append("Allergies::").append(allergies).append("\n");
+            data.append("Conditions::").append(conditions);
+            fr.close();
+
+            FileWriter fw = new FileWriter(file);
+            fw.write(data.toString());
+            fw.close();
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("Successfully Saved");
+            alert.show();
+            showDoctorExamination();
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
     public void savePatientAccount(String firstName, String lastName, LocalDate birthday, String contact, String email, String insurance, String pharmacy) {

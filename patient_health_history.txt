@@ -1,0 +1,4 @@
+Prescriptions::aptx4869 100mg capsules once a day
+Immunizations::MMR 01-01-2024,COVID-19 02-02-2024
+Allergies::Peanuts,Milk,
+Conditions::Type II Diavetes,
