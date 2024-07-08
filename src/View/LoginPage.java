@@ -124,4 +124,22 @@ public class LoginPage {
         return scene;
     }
 
+
+
+    /* Example VBox code not needed
+       // Create a layout (VBox) to arrange the elements.
+        VBox root = new VBox(10);
+        root.getChildren().addAll(usernameLabel, usernameField, passwordLabel, passwordField, loginButton, resultLabel);
+
+        // Create the scene and set it in the stage.
+        Scene scene = new Scene(root, 300, 200);
+        primaryStage.setScene(scene);
+
+        // Set the title of the window.
+        primaryStage.setTitle("Login Form App");
+
+        // Show the window.
+        primaryStage.show();
+    
+    */
 }
