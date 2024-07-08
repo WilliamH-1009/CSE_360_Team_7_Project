@@ -48,6 +48,7 @@ public class Controller {
     public boolean checkExisting(String first_name, String last_name, LocalDate birthday) {
         if (!first_name.isEmpty() && !last_name.isEmpty() && birthday != null) {
             File file = new File("patient_information.txt");
+            System.out.println(first_name + " == " + last_name + " == " + birthday.toString());
             try {
                 Scanner fr = new Scanner(file);
                 if (fr.hasNextLine()) {
@@ -93,7 +94,7 @@ public class Controller {
 
             File file = new File("patient_information.txt");
             try {
-                FileWriter fw = new FileWriter(file, true);
+                FileWriter fw = new FileWriter(file);
                 fw.write(data.toString());
                 fw.close();
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -119,6 +120,9 @@ public class Controller {
                 Scanner fr = new Scanner(file);
                 if (fr.hasNextLine()) {
                     Map<String, String> patient_info_data = new LinkedHashMap<>();
+                    patient_info_data.put("FirstName", fr.nextLine().split("::")[1]);
+                    patient_info_data.put("LastName", fr.nextLine().split("::")[1]);
+                    patient_info_data.put("Birthday", fr.nextLine().split("::")[1]);
                     patient_info_data.put("Weight", fr.nextLine().split("::")[1]);
                     patient_info_data.put("Height_ft", fr.nextLine().split("::")[1]);
                     patient_info_data.put("Height_in", fr.nextLine().split("::")[1]);

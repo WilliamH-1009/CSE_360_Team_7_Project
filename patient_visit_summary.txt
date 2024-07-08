@@ -1,2 +1,2 @@
-issue 1 01-01-2024
-issue 2 02-02-2024
+Issue: some issue 1 -- 01-01-2024
+Issue: some other issue 2 --  02-02-2024

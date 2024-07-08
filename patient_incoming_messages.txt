@@ -1,2 +1,2 @@
-some message
-second line
+Some messages, and others...
+Messages line two.

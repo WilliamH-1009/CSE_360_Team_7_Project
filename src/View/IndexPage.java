@@ -67,6 +67,20 @@ public class IndexPage {
             }
         });
 
+        Button logout = new Button("Log Out");
+        logout.setFocusTraversable(false);
+        logout.setPrefWidth(200);
+        logout.setPrefHeight(80);
+        logout.relocate(560, 600);
+        pane.getChildren().add(logout);
+
+        logout.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                controller.showLoginPage();
+            }
+        });
+
         return scene;
     }
 }

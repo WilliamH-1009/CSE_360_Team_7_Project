@@ -1,2 +1,2 @@
-Prescriptions::321,
-Diagnoses::ccc,
+Prescriptions::AX888 10mg tablets,
+Diagnoses::very rare symptons,
