@@ -9,7 +9,6 @@ import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
-import java.time.LocalDate;
 import java.util.Map;
 import java.util.Objects;
 
@@ -30,112 +29,124 @@ public class DoctorExamination {
         // title text
         Text title = new Text("Doctor Examination");
         title.getStyleClass().add("title");
-        title.relocate(510, 50);
+        title.relocate(480, 50);
         pane.getChildren().add(title);
 
-        // patient first name input
+        // patient info label
+        Text label_patient_info = new Text("Patient Information");
+        label_patient_info.setStyle("-fx-font-weight: bold");
+        label_patient_info.relocate(100, 130);
+        pane.getChildren().add(label_patient_info);
+
+        // patient first name text
         Text label_first_name = new Text("First Name:");
-        label_first_name.relocate(50, 150);
+        label_first_name.getStyleClass().add("small-text");
+        label_first_name.relocate(100, 170);
         pane.getChildren().add(label_first_name);
 
-        TextField input_first_name = new TextField();
-        input_first_name.setFocusTraversable(false);
-        input_first_name.setPrefWidth(200);
-        input_first_name.setPrefHeight(40);
-        input_first_name.relocate(200, 130);
-        pane.getChildren().add(input_first_name);
-
-        // patient last name input
+        // patient last name text
         Text label_last_name = new Text("Last Name:");
-        label_last_name.relocate(450, 150);
+        label_last_name.getStyleClass().add("small-text");
+        label_last_name.relocate(100, 210);
         pane.getChildren().add(label_last_name);
 
-        TextField input_last_name = new TextField();
-        input_last_name.setFocusTraversable(false);
-        input_last_name.setPrefWidth(200);
-        input_last_name.setPrefHeight(40);
-        input_last_name.relocate(600, 130);
-        pane.getChildren().add(input_last_name);
-
-        // patient date of birth input
-        Text label_birthday = new Text("Date Of Birth:");
-        label_birthday.relocate(50, 250);
+        // patient date of birth text
+        Text label_birthday = new Text("Date of Birth:");
+        label_birthday.getStyleClass().add("small-text");
+        label_birthday.relocate(100, 250);
         pane.getChildren().add(label_birthday);
 
-        DatePicker input_birthday = new DatePicker();
-        input_birthday.setFocusTraversable(false);
-        input_birthday.setPrefWidth(200);
-        input_birthday.setPrefHeight(40);
-        input_birthday.relocate(200, 230);
-        pane.getChildren().add(input_birthday);
+        // patient weight text
+        Text label_weight = new Text("Weight:");
+        label_weight.getStyleClass().add("small-text");
+        label_weight.relocate(100, 290);
+        pane.getChildren().add(label_weight);
 
-        // findings input
-        Text label_findings = new Text("Physical Findings:");
-        label_findings.relocate(50, 350);
-        pane.getChildren().add(label_findings);
+        // patient height text
+        Text label_height = new Text("Height:");
+        label_height.getStyleClass().add("small-text");
+        label_height.relocate(100, 330);
+        pane.getChildren().add(label_height);
 
-        TextArea input_findings = new TextArea();
-        input_findings.setPrefWidth(500);
-        input_findings.setPrefHeight(100);
-        input_findings.relocate(200, 340);
-        pane.getChildren().add(input_findings);
+        // patient temperature text
+        Text label_temperature = new Text("Body Temperature:");
+        label_temperature.getStyleClass().add("small-text");
+        label_temperature.relocate(100, 370);
+        pane.getChildren().add(label_temperature);
 
-        // medication input
-        Text label_medication = new Text("Prescription Medication:");
-        label_medication.relocate(50, 500);
-        pane.getChildren().add(label_medication);
+        // patient pressure text
+        Text label_pressure = new Text("Blood Pressure:");
+        label_pressure.getStyleClass().add("small-text");
+        label_pressure.relocate(100, 410);
+        pane.getChildren().add(label_pressure);
 
-        TextField input_medication = new TextField();
-        input_medication.setFocusTraversable(false);
-        input_medication.setPrefWidth(300);
-        input_medication.setPrefHeight(40);
-        input_medication.relocate(200, 490);
-        pane.getChildren().add(input_medication);
+        // past prescriptions input
+        Text label_past_prescriptions = new Text("Past Prescriptions");
+        label_past_prescriptions.relocate(450, 130);
+        pane.getChildren().add(label_past_prescriptions);
 
-        // save examination info button
-        Button save_examination = new Button("Save Examination Info");
+        TextArea input_past_prescriptions = new TextArea();
+        input_past_prescriptions.setFocusTraversable(false);
+        input_past_prescriptions.setEditable(false);
+        input_past_prescriptions.setPrefWidth(300);
+        input_past_prescriptions.setPrefHeight(150);
+        input_past_prescriptions.relocate(450, 160);
+        pane.getChildren().add(input_past_prescriptions);
+
+        // past immunizations input
+        Text label_past_immunizations = new Text("Past Immunizations");
+        label_past_immunizations.relocate(450, 350);
+        pane.getChildren().add(label_past_immunizations);
+
+        TextArea input_past_immunizations = new TextArea();
+        input_past_immunizations.setFocusTraversable(false);
+        input_past_immunizations.setEditable(false);
+        input_past_immunizations.setPrefWidth(300);
+        input_past_immunizations.setPrefHeight(150);
+        input_past_immunizations.relocate(450, 380);
+        pane.getChildren().add(input_past_immunizations);
+
+        // new prescriptions input
+        Text label_new_prescriptions = new Text("New Prescriptions");
+        label_new_prescriptions.relocate(900, 130);
+        pane.getChildren().add(label_new_prescriptions);
+
+        TextArea input_new_prescriptions = new TextArea();
+        input_new_prescriptions.setFocusTraversable(false);
+        input_new_prescriptions.setPrefWidth(300);
+        input_new_prescriptions.setPrefHeight(150);
+        input_new_prescriptions.relocate(900, 160);
+        pane.getChildren().add(input_new_prescriptions);
+
+        // diagnoses input
+        Text label_diagnoses = new Text("Diagnoses");
+        label_diagnoses.relocate(900, 350);
+        pane.getChildren().add(label_diagnoses);
+
+        TextArea input_diagnoses = new TextArea();
+        input_diagnoses.setFocusTraversable(false);
+        input_diagnoses.setPrefWidth(300);
+        input_diagnoses.setPrefHeight(150);
+        input_diagnoses.relocate(900, 380);
+        pane.getChildren().add(input_diagnoses);
+
+        // save examination results button
+        Button save_examination = new Button("Save\nExamination Results");
         save_examination.setFocusTraversable(false);
-        save_examination.setPrefWidth(200);
-        save_examination.setPrefHeight(40);
-        save_examination.relocate(600, 600);
+        save_examination.setPrefWidth(300);
+        save_examination.setPrefHeight(80);
+        save_examination.relocate(900, 600);
         pane.getChildren().add(save_examination);
 
         // save examination info action
         save_examination.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                controller.saveExaminationInfo(input_first_name.getText(), input_last_name.getText(), input_birthday.getValue(),
-                        input_findings.getText(), input_medication.getText());
+//                controller.saveExaminationInfo(input_first_name.getText(), input_last_name.getText(), input_birthday.getValue(),
+//                        input_findings.getText(), input_medication.getText());
             }
         });
 
-        // load patient history button
-        Text label_history = new Text("Patient History:");
-        label_history.setStyle("-fx-font-weight: bold");
-        label_history.relocate(50, 700);
-        pane.getChildren().add(label_history);
-
-        TextArea history_area = new TextArea();
-        history_area.setPrefWidth(900);
-        history_area.setPrefHeight(200);
-        history_area.relocate(200, 700);
-        pane.getChildren().add(history_area);
-
-        Button load_history = new Button("Load History");
-        load_history.setFocusTraversable(false);
-        load_history.setPrefWidth(200);
-        load_history.setPrefHeight(40);
-        load_history.relocate(1100, 700);
-        pane.getChildren().add(load_history);
-
-        // load patient history action
-        load_history.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                String history = controller.getPatientHistory(input_first_name.getText(), input_last_name.getText(), input_birthday.getValue());
-                history_area.setText(history);
-            }
-        });
 
         return scene;
     }

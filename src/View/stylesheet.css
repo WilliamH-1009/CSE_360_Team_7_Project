@@ -12,3 +12,8 @@
     -fx-font-family: "Arial";
     -fx-font-size: 15pt;
 }
+
+.small-text{
+    -fx-font-family: "Arial";
+    -fx-font-size: 13pt;
+}
