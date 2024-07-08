@@ -34,28 +34,40 @@ public class NurseGreet {
         title.relocate(510, 130);
         pane.getChildren().add(title);
 
-        // patient name input
-        Text label_name = new Text("Patient Name:");
-        label_name.relocate(150, 250);
-        pane.getChildren().add(label_name);
+        // patient first name input
+        Text label_first_name = new Text("Patient First Name:");
+        label_first_name.relocate(90, 230);
+        pane.getChildren().add(label_first_name);
 
-        TextField input_name = new TextField();
-        input_name.setFocusTraversable(false);
-        input_name.setPrefWidth(270);
-        input_name.setPrefHeight(40);
-        input_name.relocate(330, 230);
-        pane.getChildren().add(input_name);
+        TextField input_first_name = new TextField();
+        input_first_name.setFocusTraversable(false);
+        input_first_name.setPrefWidth(270);
+        input_first_name.setPrefHeight(40);
+        input_first_name.relocate(330, 210);
+        pane.getChildren().add(input_first_name);
+
+        // patient last name input
+        Text label_last_name = new Text("Patient Last Name:");
+        label_last_name.relocate(90, 290);
+        pane.getChildren().add(label_last_name);
+
+        TextField input_last_name = new TextField();
+        input_last_name.setFocusTraversable(false);
+        input_last_name.setPrefWidth(270);
+        input_last_name.setPrefHeight(40);
+        input_last_name.relocate(330, 270);
+        pane.getChildren().add(input_last_name);
 
         // patient date of birth input
         Text label_birthday = new Text("Patient Date Of Birth:");
-        label_birthday.relocate(150, 350);
+        label_birthday.relocate(90, 350);
         pane.getChildren().add(label_birthday);
 
         DatePicker input_birthday = new DatePicker();
         input_birthday.setFocusTraversable(false);
-        input_birthday.setPrefWidth(190);
+        input_birthday.setPrefWidth(200);
         input_birthday.setPrefHeight(40);
-        input_birthday.relocate(410, 330);
+        input_birthday.relocate(400, 330);
         pane.getChildren().add(input_birthday);
 
         // patient age check
@@ -173,23 +185,31 @@ public class NurseGreet {
 
         check_existing.selectedProperty().addListener((o, oldVal, newVal) -> {
             if (newVal) {
-                if (controller.checkExisting(input_name.getText(), input_birthday.getValue())) {
+                if (controller.checkExisting(input_first_name.getText(), input_last_name.getText(),
+                        input_birthday.getValue())) {
                     Map<String, String> patient_info_data;
-                    patient_info_data = controller.getPatientInfo(input_name.getText(), input_birthday.getValue());
+                    patient_info_data = controller.getPatientInfo(input_first_name.getText(),
+                            input_last_name.getText(), input_birthday.getValue());
                     for (Map.Entry<String, String> entry : patient_info_data.entrySet()) {
                         switch (entry.getKey()) {
                             case "Weight":
                                 input_weight.setText(entry.getValue());
+                                break;
                             case "Height_ft":
                                 input_height_ft.setText(entry.getValue());
+                                break;
                             case "Height_in":
                                 input_height_in.setText(entry.getValue());
+                                break;
                             case "Temperature":
                                 input_temperature.setText(entry.getValue());
+                                break;
                             case "Pressure1":
                                 input_pressure1.setText(entry.getValue());
+                                break;
                             case "Pressure2":
                                 input_pressure2.setText(entry.getValue());
+                                break;
                         }
                     }
                 }
@@ -215,7 +235,7 @@ public class NurseGreet {
         save_info.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                controller.savePatientInfo(input_name.getText(), input_birthday.getValue(),
+                controller.savePatientInfo(input_first_name.getText(), input_last_name.getText(), input_birthday.getValue(),
                         input_weight.getText(), input_height_ft.getText(), input_height_in.getText(),
                         input_temperature.getText(), input_pressure1.getText(), input_pressure2.getText());
             }

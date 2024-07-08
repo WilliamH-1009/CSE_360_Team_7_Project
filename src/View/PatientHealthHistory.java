@@ -173,12 +173,16 @@ public class PatientHealthHistory {
             switch (entry.getKey()) {
                 case "Prescriptions":
                     input_prescriptions.setText(entry.getValue().replaceAll(",", "\n"));
+                    break;
                 case "Immunizations":
                     input_immunizations.setText(entry.getValue().replaceAll(",", "\n"));
+                    break;
                 case "Allergies":
                     input_allergies.setText(entry.getValue().replaceAll(",", "\n"));
+                    break;
                 case "Conditions":
                     input_conditions.setText(entry.getValue().replaceAll(",", "\n"));
+                    break;
             }
         }
 

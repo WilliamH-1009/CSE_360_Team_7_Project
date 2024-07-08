@@ -39,43 +39,43 @@ public class DoctorExamination {
         pane.getChildren().add(label_patient_info);
 
         // patient first name text
-        Text label_first_name = new Text("First Name:");
+        Text label_first_name = new Text("First Name: ");
         label_first_name.getStyleClass().add("small-text");
         label_first_name.relocate(100, 170);
         pane.getChildren().add(label_first_name);
 
         // patient last name text
-        Text label_last_name = new Text("Last Name:");
+        Text label_last_name = new Text("Last Name: ");
         label_last_name.getStyleClass().add("small-text");
         label_last_name.relocate(100, 210);
         pane.getChildren().add(label_last_name);
 
         // patient date of birth text
-        Text label_birthday = new Text("Date of Birth:");
+        Text label_birthday = new Text("Date of Birth: ");
         label_birthday.getStyleClass().add("small-text");
         label_birthday.relocate(100, 250);
         pane.getChildren().add(label_birthday);
 
         // patient weight text
-        Text label_weight = new Text("Weight:");
+        Text label_weight = new Text("Weight: ");
         label_weight.getStyleClass().add("small-text");
         label_weight.relocate(100, 290);
         pane.getChildren().add(label_weight);
 
         // patient height text
-        Text label_height = new Text("Height:");
+        Text label_height = new Text("Height: ");
         label_height.getStyleClass().add("small-text");
         label_height.relocate(100, 330);
         pane.getChildren().add(label_height);
 
         // patient temperature text
-        Text label_temperature = new Text("Body Temperature:");
+        Text label_temperature = new Text("Body Temperature: ");
         label_temperature.getStyleClass().add("small-text");
         label_temperature.relocate(100, 370);
         pane.getChildren().add(label_temperature);
 
         // patient pressure text
-        Text label_pressure = new Text("Blood Pressure:");
+        Text label_pressure = new Text("Blood Pressure: ");
         label_pressure.getStyleClass().add("small-text");
         label_pressure.relocate(100, 410);
         pane.getChildren().add(label_pressure);
@@ -138,15 +138,68 @@ public class DoctorExamination {
         save_examination.relocate(900, 600);
         pane.getChildren().add(save_examination);
 
-        // save examination info action
+        // save examination results action
         save_examination.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-//                controller.saveExaminationInfo(input_first_name.getText(), input_last_name.getText(), input_birthday.getValue(),
-//                        input_findings.getText(), input_medication.getText());
+                String prescriptions = "";
+                for (String line : input_new_prescriptions.getText().split("\\n")) {
+                    prescriptions += line + ",";
+                }
+                String diagnoses = "";
+                for (String line : input_diagnoses.getText().split("\\n")) {
+                    diagnoses += line + ",";
+                }
+                controller.saveDoctorExamResults(prescriptions, diagnoses);
             }
         });
 
+        // set patient info data
+        Map<String, String> patient_info_data = controller.getAllPatientInfo();
+        for (Map.Entry<String, String> entry : patient_info_data.entrySet()) {
+            switch (entry.getKey()) {
+                case "FirstName":
+                    label_first_name.setText(label_first_name.getText() + entry.getValue());
+                    break;
+                case "LastName":
+                    label_last_name.setText(label_last_name.getText() + entry.getValue());
+                    break;
+                case "Birthday":
+                    label_birthday.setText(label_birthday.getText() + entry.getValue());
+                    break;
+                case "Weight":
+                    label_weight.setText(label_weight.getText() + entry.getValue() + " lbs.");
+                    break;
+                case "Height_ft":
+                    label_height.setText(label_height.getText() + entry.getValue() + "' ");
+                    break;
+                case "Height_in":
+                    label_height.setText(label_height.getText() + entry.getValue() + "\"");
+                    break;
+                case "Temperature":
+                    label_temperature.setText(label_temperature.getText() + entry.getValue() + " °F");
+                    break;
+                case "Pressure1":
+                    label_pressure.setText(label_pressure.getText() + entry.getValue() + " / ");
+                    break;
+                case "Pressure2":
+                    label_pressure.setText(label_pressure.getText() + entry.getValue() + " mmHg");
+                    break;
+            }
+        }
+
+        // set patient health history data
+        Map<String, String> health_history_data = controller.getPatientHealthHistory();
+        for (Map.Entry<String, String> entry : health_history_data.entrySet()) {
+            switch (entry.getKey()) {
+                case "Prescriptions":
+                    input_past_prescriptions.setText(entry.getValue().replaceAll(",", "\n"));
+                    break;
+                case "Immunizations":
+                    input_past_immunizations.setText(entry.getValue().replaceAll(",", "\n"));
+                    break;
+            }
+        }
 
         return scene;
     }
