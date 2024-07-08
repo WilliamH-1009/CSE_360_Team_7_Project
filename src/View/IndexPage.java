@@ -57,3 +57,19 @@ public class IndexPage {
         return scene;
     }
 }
+
+/*reference code not work
+
+import java.util.File;
+File object_name = new File(Directory)
+
+
+StackPane root = new StackPane();
+root.getChildren().addAll(applicationContent);
+Pane p = new Pane();
+p.setStyle("-fx-background-color: rgba(31,31,31,0.6);");
+
+
+Scene scene = new Scene(root, 300, 250);
+
+*/
