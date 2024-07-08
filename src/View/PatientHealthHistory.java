@@ -13,213 +13,176 @@ import java.util.Map;
 import java.util.Objects;
 
 public class PatientHealthHistory {
-	private final Stage stage;
+    private final Stage stage;
 
-	public PatientPortal(Stage stage) {
-		this.stage = stage;
-	}
+    public PatientHealthHistory(Stage stage) {
+        this.stage = stage;
+    }
 
-	public Scene getScene() {
-		Controller controller = new Controller(stage);
+    public Scene getScene() {
+        Controller controller = new Controller(stage);
 
-		Pane pane = new Pane();
-		Scene scene = new Scene(pane, 1300, 800);
-		scene.getStylesheets()
-				.add(Objects.requireNonNull(this.getClass().getResource("stylesheet.css")).toExternalForm());
+        Pane pane = new Pane();
+        Scene scene = new Scene(pane, 1300, 800);
+        scene.getStylesheets().add(Objects.requireNonNull(this.getClass().getResource("stylesheet.css")).toExternalForm());
 
-		// title text
-		Text title = new Text("Patient Portal");
-		title.getStyleClass().add("title");
-		title.relocate(510, 50);
-		pane.getChildren().add(title);
+        // title text
+        Text title = new Text("Patient Health History");
+        title.getStyleClass().add("title");
+        title.relocate(360, 80);
+        pane.getChildren().add(title);
 
-		// patient first name input
-		Text label_first_name = new Text("First Name:");
-		label_first_name.relocate(50, 150);
-		pane.getChildren().add(label_first_name);
+        // allergies input
+        Text label_allergies = new Text("Allergies");
+        label_allergies.relocate(150, 150);
+        pane.getChildren().add(label_allergies);
 
-		TextField input_first_name = new TextField();
-		input_first_name.setFocusTraversable(false);
-		input_first_name.setPrefWidth(200);
-		input_first_name.setPrefHeight(40);
-		input_first_name.relocate(200, 130);
-		pane.getChildren().add(input_first_name);
+        TextArea input_allergies = new TextArea();
+        input_allergies.getStyleClass().add("text-area");
+        input_allergies.setFocusTraversable(false);
+        input_allergies.setEditable(false);
+        input_allergies.setPrefWidth(300);
+        input_allergies.setPrefHeight(150);
+        input_allergies.relocate(150, 180);
+        pane.getChildren().add(input_allergies);
 
-		// patient last name input
-		Text label_last_name = new Text("Last Name:");
-		label_last_name.relocate(450, 150);
-		pane.getChildren().add(label_last_name);
+        // conditions input
+        Text label_conditions = new Text("Health Conditions");
+        label_conditions.relocate(150, 400);
+        pane.getChildren().add(label_conditions);
 
-		TextField input_last_name = new TextField();
-		input_last_name.setFocusTraversable(false);
-		input_last_name.setPrefWidth(200);
-		input_last_name.setPrefHeight(40);
-		input_last_name.relocate(600, 130);
-		pane.getChildren().add(input_last_name);
+        TextArea input_conditions = new TextArea();
+        input_conditions.getStyleClass().add("text-area");
+        input_conditions.setFocusTraversable(false);
+        input_conditions.setEditable(false);
+        input_conditions.setPrefWidth(300);
+        input_conditions.setPrefHeight(150);
+        input_conditions.relocate(150, 430);
+        pane.getChildren().add(input_conditions);
 
-		// patient date of birth input
-		Text label_birthday = new Text("Date Of Birth:");
-		label_birthday.relocate(50, 250);
-		pane.getChildren().add(label_birthday);
+        // new allergy input
+        Text label_new_allergy = new Text("Add New Allergy");
+        label_new_allergy.relocate(520, 180);
+        pane.getChildren().add(label_new_allergy);
 
-		DatePicker input_birthday = new DatePicker();
-		input_birthday.setFocusTraversable(false);
-		input_birthday.setPrefWidth(200);
-		input_birthday.setPrefHeight(40);
-		input_birthday.relocate(200, 230);
-		pane.getChildren().add(input_birthday);
+        TextField input_new_allergy = new TextField();
+        input_new_allergy.setFocusTraversable(false);
+        input_new_allergy.setPrefWidth(250);
+        input_new_allergy.setPrefHeight(40);
+        input_new_allergy.relocate(520, 210);
+        pane.getChildren().add(input_new_allergy);
 
-		// contact info
-		Text label_contact = new Text("Contact Info:");
-		label_contact.setStyle("-fx-font-weight: bold");
-		label_contact.relocate(50, 350);
-		pane.getChildren().add(label_contact);
+        // add new allergy button
+        Button add_allergy = new Button("Add");
+        add_allergy.setFocusTraversable(false);
+        add_allergy.setPrefWidth(130);
+        add_allergy.setPrefHeight(40);
+        add_allergy.relocate(520, 280);
+        pane.getChildren().add(add_allergy);
 
-		TextField input_contact = new TextField();
-		input_contact.setPromptText("Phone Number");
-		input_contact.setFocusTraversable(false);
-		input_contact.setPrefWidth(200);
-		input_contact.setPrefHeight(40);
-		input_contact.relocate(200, 340);
-		pane.getChildren().add(input_contact);
+        add_allergy.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                input_allergies.appendText(input_new_allergy.getText() + "\n");
+                input_new_allergy.setText("");
+            }
+        });
 
-		TextField input_email = new TextField();
-		input_email.setPromptText("Email Address");
-		input_email.setFocusTraversable(false);
-		input_email.setPrefWidth(300);
-		input_email.setPrefHeight(40);
-		input_email.relocate(450, 340);
-		pane.getChildren().add(input_email);
+        // new condition input
+        Text label_new_condition = new Text("Add New Condition");
+        label_new_condition.relocate(520, 440);
+        pane.getChildren().add(label_new_condition);
 
-		// insurance info
-		Text label_insurance = new Text("Insurance Info:");
-		label_insurance.setStyle("-fx-font-weight: bold");
-		label_insurance.relocate(50, 450);
-		pane.getChildren().add(label_insurance);
+        TextField input_new_condition = new TextField();
+        input_new_condition.setFocusTraversable(false);
+        input_new_condition.setPrefWidth(250);
+        input_new_condition.setPrefHeight(40);
+        input_new_condition.relocate(520, 470);
+        pane.getChildren().add(input_new_condition);
 
-		TextField input_insurance = new TextField();
-		input_insurance.setPromptText("Insurance Details");
-		input_insurance.setFocusTraversable(false);
-		input_insurance.setPrefWidth(300);
-		input_insurance.setPrefHeight(40);
-		input_insurance.relocate(200, 440);
-		pane.getChildren().add(input_insurance);
+        // add new condition button
+        Button add_condition = new Button("Add");
+        add_condition.setFocusTraversable(false);
+        add_condition.setPrefWidth(130);
+        add_condition.setPrefHeight(40);
+        add_condition.relocate(520, 540);
+        pane.getChildren().add(add_condition);
 
-		// pharmacy info
-		Text label_pharmacy = new Text("Pharmacy Info:");
-		label_pharmacy.setStyle("-fx-font-weight: bold");
-		label_pharmacy.relocate(50, 550);
-		pane.getChildren().add(label_pharmacy);
+        add_condition.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                input_conditions.appendText(input_new_condition.getText() + "\n");
+                input_new_condition.setText("");
+            }
+        });
 
-		TextField input_pharmacy = new TextField();
-		input_pharmacy.setPromptText("Pharmacy Details");
-		input_pharmacy.setFocusTraversable(false);
-		input_pharmacy.setPrefWidth(300);
-		input_pharmacy.setPrefHeight(40);
-		input_pharmacy.relocate(200, 540);
-		pane.getChildren().add(input_pharmacy);
+        // prescriptions input
+        Text label_prescriptions = new Text("Previous Prescriptions");
+        label_prescriptions.relocate(900, 150);
+        pane.getChildren().add(label_prescriptions);
 
-		// save account info button
-		Button save_account = new Button("Save Account Info");
-		save_account.setFocusTraversable(false);
-		save_account.setPrefWidth(200);
-		save_account.setPrefHeight(40);
-		save_account.relocate(600, 600);
-		pane.getChildren().add(save_account);
+        TextArea input_prescriptions = new TextArea();
+        input_prescriptions.getStyleClass().add("text-area");
+        input_prescriptions.setFocusTraversable(false);
+        input_prescriptions.setEditable(false);
+        input_prescriptions.setPrefWidth(300);
+        input_prescriptions.setPrefHeight(150);
+        input_prescriptions.relocate(900, 180);
+        pane.getChildren().add(input_prescriptions);
 
-		// save account info action
-		save_account.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				controller.savePatientAccount(input_first_name.getText(), input_last_name.getText(),
-						input_birthday.getValue(), input_contact.getText(), input_email.getText(),
-						input_insurance.getText(), input_pharmacy.getText());
-			}
-		});
+        // immunizations input
+        Text label_immunizations = new Text("Previous Immunizations");
+        label_immunizations.relocate(900, 400);
+        pane.getChildren().add(label_immunizations);
 
-		// load patient info button
-		Button load_info = new Button("Load Patient Info");
-		load_info.setFocusTraversable(false);
-		load_info.setPrefWidth(200);
-		load_info.setPrefHeight(40);
-		load_info.relocate(600, 650);
-		pane.getChildren().add(load_info);
+        TextArea input_immunizations = new TextArea();
+        input_immunizations.getStyleClass().add("text-area");
+        input_immunizations.setFocusTraversable(false);
+        input_immunizations.setEditable(false);
+        input_immunizations.setPrefWidth(300);
+        input_immunizations.setPrefHeight(150);
+        input_immunizations.relocate(900, 430);
+        pane.getChildren().add(input_immunizations);
 
-		// load patient info action
-		load_info.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				Map<String, String> patientInfo = controller.loadPatientInfo(input_first_name.getText(),
-						input_last_name.getText(), input_birthday.getValue());
-				if (patientInfo != null) {
-					input_contact.setText(patientInfo.get("Contact"));
-					input_email.setText(patientInfo.get("Email"));
-					input_insurance.setText(patientInfo.get("Insurance"));
-					input_pharmacy.setText(patientInfo.get("Pharmacy"));
-				}
-			}
-		});
+        // proceed button
+        Button proceed = new Button(" Proceed to\nExamination");
+        proceed.setFocusTraversable(false);
+        proceed.setPrefWidth(250);
+        proceed.setPrefHeight(80);
+        proceed.relocate(520, 670);
+        pane.getChildren().add(proceed);
 
-		// patient visit summary
-		Text label_summary = new Text("Visit Summary:");
-		label_summary.setStyle("-fx-font-weight: bold");
-		label_summary.relocate(50, 700);
-		pane.getChildren().add(label_summary);
+        proceed.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                String allergies = "";
+                for (String line : input_allergies.getText().split("\\n")) {
+                    allergies += line + ",";
+                }
+                String conditions = "";
+                for (String line : input_conditions.getText().split("\\n")) {
+                    conditions += line + ",";
+                }
+                controller.savePatientHealthHistory(allergies, conditions);
+            }
+        });
 
-		TextArea visit_summary = new TextArea();
-		visit_summary.setPrefWidth(900);
-		visit_summary.setPrefHeight(200);
-		visit_summary.relocate(200, 700);
-		pane.getChildren().add(visit_summary);
+        // set patient health history data
+        Map<String, String> health_history_data = controller.getPatientHealthHistory();
+        for (Map.Entry<String, String> entry : health_history_data.entrySet()) {
+            switch (entry.getKey()) {
+                case "Prescriptions":
+                    input_prescriptions.setText(entry.getValue().replaceAll(",", "\n"));
+                case "Immunizations":
+                    input_immunizations.setText(entry.getValue().replaceAll(",", "\n"));
+                case "Allergies":
+                    input_allergies.setText(entry.getValue().replaceAll(",", "\n"));
+                case "Conditions":
+                    input_conditions.setText(entry.getValue().replaceAll(",", "\n"));
+            }
+        }
 
-		// load visit summary button
-		Button load_summary = new Button("Load Summary");
-		load_summary.setFocusTraversable(false);
-		load_summary.setPrefWidth(200);
-		load_summary.setPrefHeight(40);
-		load_summary.relocate(1100, 700);
-		pane.getChildren().add(load_summary);
 
-		// load visit summary action
-		load_summary.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				String summary = controller.getVisitSummary(input_first_name.getText(), input_last_name.getText(),
-						input_birthday.getValue());
-				visit_summary.setText(summary);
-			}
-		});
-
-		// messaging
-		Text label_message = new Text("Messages:");
-		label_message.setStyle("-fx-font-weight: bold");
-		label_message.relocate(50, 900);
-		pane.getChildren().add(label_message);
-
-		TextArea message_area = new TextArea();
-		message_area.setPromptText("Enter your message here...");
-		message_area.setPrefWidth(900);
-		message_area.setPrefHeight(100);
-		message_area.relocate(200, 900);
-		pane.getChildren().add(message_area);
-
-		// send message button
-		Button send_message = new Button("Send Message");
-		send_message.setFocusTraversable(false);
-		send_message.setPrefWidth(200);
-		send_message.setPrefHeight(40);
-		send_message.relocate(1100, 900);
-		pane.getChildren().add(send_message);
-
-		// send message action
-		send_message.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				controller.sendMessage(input_first_name.getText(), input_last_name.getText(), input_birthday.getValue(),
-						message_area.getText());
-			}
-		});
-
-		return scene;
-	}
+        return scene;
+    }
 }
